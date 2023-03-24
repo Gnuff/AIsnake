@@ -40,6 +40,11 @@ h1 {
     color: #34854b;
 }
 
+#death-counter {
+    font-size: 20px;
+    color: #34854b;
+}
+
 #instructions {
     margin-top: 10px;
     margin-bottom: 30px;
