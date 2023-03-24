@@ -36,10 +36,10 @@ function loop() {
             velocity = { x: 1, y: 0 };
         }
 
-        ctx.fillStyle = 'red';
+        ctx.fillStyle = '#c82e50';
         ctx.fillRect(apple.x * tileSize, apple.y * tileSize, tileSize, tileSize);
 
-        ctx.fillStyle = 'lime';
+        ctx.fillStyle = '#50c878';
         for (const part of snake) {
             ctx.fillRect(part.x * tileSize, part.y * tileSize, tileSize, tileSize);
         }
