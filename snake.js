@@ -118,11 +118,17 @@ const topScoreElement = document.getElementById('top-score');
 let deathCounter = 0;
 const deathCounterElement = document.getElementById('death-counter');
 
+let moveNextFrame = true;
+
 function gameLoop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     snake.draw();
     apple.draw();
+
+    if (moveNextFrame) {
+        snake.move();
+    }
 
     if (snake.collidedWithWall() || snake.collidedWithItself()) {
         snake.reset();
@@ -145,7 +151,7 @@ function gameLoop() {
         }
     }
 
-    setTimeout(gameLoop, 100);
+    setTimeout(gameLoop, 50);
 }
 
 gameLoop();
@@ -161,10 +167,10 @@ window.addEventListener('keydown', (event) => {
 
     if (Object.keys(opposites).includes(direction) && direction !== opposites[snake.direction]) {
         snake.updateDirection(direction);
-        // Move the snake with a slight delay
-        setTimeout(() => {
-            snake.move();
-        }, 50);
+        snake.move();
+        moveNextFrame = false;
+    } else {
+        moveNextFrame = true;
     }
 });
 
