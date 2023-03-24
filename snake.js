@@ -9,7 +9,9 @@ let snake = [{ x: 10, y: 10 }];
 let apple = { x: 15, y: 15 };
 let velocity = { x: 1, y: 0 };
 
-let speed = 150; // Adjust this value to control the snake's speed. Higher values make the snake slower.
+let speed = 150;
+let score = 0;
+const scoreCounter = document.getElementById('score-counter');
 
 document.addEventListener('keydown', (event) => {
     if (event.key === 'ArrowUp' && velocity.y === 0) velocity = { x: 0, y: -1 };
@@ -17,6 +19,10 @@ document.addEventListener('keydown', (event) => {
     if (event.key === 'ArrowLeft' && velocity.x === 0) velocity = { x: -1, y: 0 };
     if (event.key === 'ArrowRight' && velocity.x === 0) velocity = { x: 1, y: 0 };
 });
+
+function updateScore() {
+    scoreCounter.textContent = `Score: ${score}`;
+}
 
 function loop() {
     setTimeout(() => {
@@ -27,6 +33,8 @@ function loop() {
 
         if (snake[0].x === apple.x && snake[0].y === apple.y) {
             apple = { x: Math.floor(Math.random() * resolution), y: Math.floor(Math.random() * resolution) };
+            score++;
+            updateScore();
         } else {
             snake.shift();
         }
@@ -34,6 +42,8 @@ function loop() {
         if (snake[0].x < 0 || snake[0].x >= resolution || snake[0].y < 0 || snake[0].y >= resolution) {
             snake = [{ x: 10, y: 10 }];
             velocity = { x: 1, y: 0 };
+            score = 0;
+            updateScore();
         }
 
         ctx.fillStyle = '#c82e50';
