@@ -109,6 +109,8 @@ class Apple {
     }
 }
 
+// ... previous code ...
+
 const snake = new Snake();
 const apple = new Apple(snake);
 let score = 0;
@@ -118,17 +120,13 @@ const topScoreElement = document.getElementById('top-score');
 let deathCounter = 0;
 const deathCounterElement = document.getElementById('death-counter');
 
-let moveNextFrame = true;
-
 function gameLoop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     snake.draw();
     apple.draw();
 
-    if (moveNextFrame) {
-        snake.move();
-    }
+    snake.move();
 
     if (snake.collidedWithWall() || snake.collidedWithItself()) {
         snake.reset();
@@ -151,7 +149,7 @@ function gameLoop() {
         }
     }
 
-    setTimeout(gameLoop, 50);
+    setTimeout(gameLoop, 100);
 }
 
 gameLoop();
@@ -167,10 +165,6 @@ window.addEventListener('keydown', (event) => {
 
     if (Object.keys(opposites).includes(direction) && direction !== opposites[snake.direction]) {
         snake.updateDirection(direction);
-        snake.move();
-        moveNextFrame = false;
-    } else {
-        moveNextFrame = true;
     }
 });
 
