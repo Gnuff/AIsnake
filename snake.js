@@ -38,10 +38,13 @@ class Snake {
     }
 
     draw() {
-        ctx.fillStyle = '#34854b';
-        for (const cell of this.snakeArray) {
-            ctx.fillRect(cell.x, cell.y, resolution, resolution);
-        }
+        ctx.fillStyle = '#222';
+        this.body.forEach(({ x, y }) => {
+            ctx.fillRect(x * tileSize + 1, y * tileSize + 1, tileSize - 2, tileSize - 2);
+            // Add shadow effect
+            ctx.fillStyle = '#50c878';
+            ctx.fillRect(x * tileSize + 3, y * tileSize + 3, tileSize - 6, tileSize - 6);
+        });
     }
 
     collidedWithWall() {
@@ -104,8 +107,11 @@ class Apple {
     }
 
     draw() {
-        ctx.fillStyle = '#e63946';
-        ctx.fillRect(this.position.x, this.position.y, resolution, resolution);
+        ctx.fillStyle = '#222';
+        ctx.fillRect(this.x * tileSize + 1, this.y * tileSize + 1, tileSize - 2, tileSize - 2);
+        // Add shadow effect
+        ctx.fillStyle = 'red';
+        ctx.fillRect(this.x * tileSize + 3, this.y * tileSize + 3, tileSize - 6, tileSize - 6);
     }
 }
 
