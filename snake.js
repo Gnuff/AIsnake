@@ -2,8 +2,8 @@ const canvas = document.getElementById('game-board');
 const ctx = canvas.getContext('2d');
 
 const resolution = 20;
-canvas.width = 400;
-canvas.height = 400;
+canvas.width = 600;
+canvas.height = 600;
 
 class Snake {
     constructor() {
@@ -148,7 +148,7 @@ function gameLoop() {
         }
     }
 
-    setTimeout(gameLoop, 100);
+    setTimeout(gameLoop, 200);
 }
 
 gameLoop();
