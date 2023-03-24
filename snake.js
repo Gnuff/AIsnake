@@ -16,30 +16,34 @@ document.addEventListener('keydown', (event) => {
     if (event.key === 'ArrowRight' && velocity.x === 0) velocity = { x: 1, y: 0 };
 });
 
+let speed = 150; // Adjust this value to control the snake's speed. Higher values make the snake slower.
+
 function loop() {
-    requestAnimationFrame(loop);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    setTimeout(() => {
+        requestAnimationFrame(loop);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    snake.push({ x: snake[0].x + velocity.x, y: snake[0].y + velocity.y });
+        snake.push({ x: snake[0].x + velocity.x, y: snake[0].y + velocity.y });
 
-    if (snake[0].x === apple.x && snake[0].y === apple.y) {
-        apple = { x: Math.floor(Math.random() * resolution), y: Math.floor(Math.random() * resolution) };
-    } else {
-        snake.shift();
-    }
+        if (snake[0].x === apple.x && snake[0].y === apple.y) {
+            apple = { x: Math.floor(Math.random() * resolution), y: Math.floor(Math.random() * resolution) };
+        } else {
+            snake.shift();
+        }
 
-    if (snake[0].x < 0 || snake[0].x >= resolution || snake[0].y < 0 || snake[0].y >= resolution) {
-        snake = [{ x: 10, y: 10 }];
-        velocity = { x: 1, y: 0 };
-    }
+        if (snake[0].x < 0 || snake[0].x >= resolution || snake[0].y < 0 || snake[0].y >= resolution) {
+            snake = [{ x: 10, y: 10 }];
+            velocity = { x: 1, y: 0 };
+        }
 
-    ctx.fillStyle = 'red';
-    ctx.fillRect(apple.x * tileSize, apple.y * tileSize, tileSize, tileSize);
+        ctx.fillStyle = 'red';
+        ctx.fillRect(apple.x * tileSize, apple.y * tileSize, tileSize, tileSize);
 
-    ctx.fillStyle = 'lime';
-    for (const part of snake) {
-        ctx.fillRect(part.x * tileSize, part.y * tileSize, tileSize, tileSize);
-    }
+        ctx.fillStyle = 'lime';
+        for (const part of snake) {
+            ctx.fillRect(part.x * tileSize, part.y * tileSize, tileSize, tileSize);
+        }
+    }, speed);
 }
 
 loop();
