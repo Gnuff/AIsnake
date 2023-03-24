@@ -12,6 +12,8 @@ let velocity = { x: 1, y: 0 };
 let speed = 150;
 let currentScore = 0;
 let topScore = 0;
+let deathCounter = 0;
+const deathCounterElement = document.getElementById('death-counter');
 const currentScoreCounter = document.getElementById('current-score');
 const topScoreCounter = document.getElementById('top-score');
 
@@ -55,7 +57,18 @@ function loop() {
             currentScore = 0;
             updateCurrentScore();
         }
-
+        
+        if (snake.collidedWithWall() || snake.collidedWithItself()) {
+        snake.reset();
+        apple.generate(snake);
+        // Increment the death counter and update the display
+        deathCounter++;
+        deathCounterElement.textContent = `Deaths: ${deathCounter}`;
+        } else {
+            snake.move();
+        }
+        
+        
         ctx.fillStyle = '#c82e50';
         ctx.fillRect(apple.x * tileSize, apple.y * tileSize, tileSize, tileSize);
 
