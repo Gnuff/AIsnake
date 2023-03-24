@@ -2,8 +2,8 @@ const canvas = document.getElementById('game-board');
 const ctx = canvas.getContext('2d');
 
 const resolution = 20;
-canvas.width = 600;
-canvas.height = 600;
+canvas.width = 400;
+canvas.height = 400;
 
 class Snake {
     constructor() {
@@ -122,10 +122,9 @@ function gameLoop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     snake.draw();
-    snake.move();
     apple.draw();
 
-        if (snake.collidedWithWall() || snake.collidedWithItself()) {
+    if (snake.collidedWithWall() || snake.collidedWithItself()) {
         snake.reset();
         apple.generate(snake);
         score = 0;
@@ -133,8 +132,6 @@ function gameLoop() {
         // Increment the death counter and update the display
         deathCounter++;
         deathCounterElement.textContent = `Deaths: ${deathCounter}`;
-    } else {
-        snake.move();
     }
 
     if (snake.eatApple(apple)) {
@@ -148,7 +145,7 @@ function gameLoop() {
         }
     }
 
-    setTimeout(gameLoop, 200);
+    setTimeout(gameLoop, 100);
 }
 
 gameLoop();
@@ -164,6 +161,10 @@ window.addEventListener('keydown', (event) => {
 
     if (Object.keys(opposites).includes(direction) && direction !== opposites[snake.direction]) {
         snake.updateDirection(direction);
+        // Move the snake with a slight delay
+        setTimeout(() => {
+            snake.move();
+        }, 50);
     }
 });
 
@@ -172,4 +173,3 @@ window.addEventListener('keydown', (event) => {
         event.preventDefault();
     }
 });
-
