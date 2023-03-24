@@ -1,33 +1,32 @@
 body {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    height: 100vh;
-    background-color: #222;
+    font-family: Arial, sans-serif;
     margin: 0;
-    overflow: hidden;
+    padding: 0;
 }
 
 h1 {
-    color: #50c878; /* Emerald green */
-    font-family: Arial, sans-serif;
-    margin-bottom: 1rem;
+    color: #50c878;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    padding: 0;
 }
 
 .game-container {
     display: flex;
-    justify-content: center;
     align-items: center;
 }
 
-canvas {
-    border: 1px solid #fff;
+#game-board {
+    border: 1px solid #000;
 }
 
-#score-counter {
-    color: #fff;
-    font-family: Arial, sans-serif;
-    font-size: 1.5rem;
-    margin-left: 1rem;
+#current-score,
+#top-score {
+    font-size: 20px;
+    color: #50c878;
+    margin-left: 20px;
+    white-space: nowrap;
 }
