@@ -1,11 +1,18 @@
 body {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
     background-color: #222;
     margin: 0;
     overflow: hidden;
+}
+
+h1 {
+    color: #50c878; /* Emerald green */
+    font-family: Arial, sans-serif;
+    margin-bottom: 1rem;
 }
 
 canvas {
