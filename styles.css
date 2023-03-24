@@ -5,6 +5,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #2d3a3f;
 }
 
 h1 {
@@ -20,6 +21,7 @@ h1 {
 }
 
 #game-board {
+    background-color: #1e272e;
     border: 1px solid #000;
 }
 
