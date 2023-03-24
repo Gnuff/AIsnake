@@ -16,7 +16,7 @@ document.addEventListener('keydown', (event) => {
     if (event.key === 'ArrowRight' && velocity.x === 0) velocity = { x: 1, y: 0 };
 });
 
-let speed = 150; // Adjust this value to control the snake's speed. Higher values make the snake slower.
+let speed = 600; // Adjust this value to control the snake's speed. Higher values make the snake slower.
 
 function loop() {
     setTimeout(() => {
