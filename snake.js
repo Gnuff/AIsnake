@@ -9,14 +9,14 @@ let snake = [{ x: 10, y: 10 }];
 let apple = { x: 15, y: 15 };
 let velocity = { x: 1, y: 0 };
 
+let speed = 150; // Adjust this value to control the snake's speed. Higher values make the snake slower.
+
 document.addEventListener('keydown', (event) => {
     if (event.key === 'ArrowUp' && velocity.y === 0) velocity = { x: 0, y: -1 };
     if (event.key === 'ArrowDown' && velocity.y === 0) velocity = { x: 0, y: 1 };
     if (event.key === 'ArrowLeft' && velocity.x === 0) velocity = { x: -1, y: 0 };
     if (event.key === 'ArrowRight' && velocity.x === 0) velocity = { x: 1, y: 0 };
 });
-
-let speed = 1000; // Adjust this value to control the snake's speed. Higher values make the snake slower.
 
 function loop() {
     setTimeout(() => {
