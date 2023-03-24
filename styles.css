@@ -32,3 +32,16 @@ h1 {
     margin-left: 20px;
     white-space: nowrap;
 }
+
+footer {
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+    color: #50c878;
+    font-size: 14px;
+    margin-top: 30px;
+}
+
+footer p {
+    margin: 0;
+}
