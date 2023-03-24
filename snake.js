@@ -10,8 +10,10 @@ let apple = { x: 15, y: 15 };
 let velocity = { x: 1, y: 0 };
 
 let speed = 150;
-let score = 0;
-const scoreCounter = document.getElementById('score-counter');
+let currentScore = 0;
+let topScore = 0;
+const currentScoreCounter = document.getElementById('current-score');
+const topScoreCounter = document.getElementById('top-score');
 
 document.addEventListener('keydown', (event) => {
     if (event.key === 'ArrowUp' && velocity.y === 0) velocity = { x: 0, y: -1 };
@@ -20,8 +22,12 @@ document.addEventListener('keydown', (event) => {
     if (event.key === 'ArrowRight' && velocity.x === 0) velocity = { x: 1, y: 0 };
 });
 
-function updateScore() {
-    scoreCounter.textContent = `Score: ${score}`;
+function updateCurrentScore() {
+    currentScoreCounter.textContent = `Current score: ${currentScore}`;
+}
+
+function updateTopScore() {
+    topScoreCounter.textContent = `Top score: ${topScore}`;
 }
 
 function loop() {
@@ -33,8 +39,8 @@ function loop() {
 
         if (snake[0].x === apple.x && snake[0].y === apple.y) {
             apple = { x: Math.floor(Math.random() * resolution), y: Math.floor(Math.random() * resolution) };
-            score++;
-            updateScore();
+            currentScore++;
+            updateCurrentScore();
         } else {
             snake.shift();
         }
@@ -42,8 +48,12 @@ function loop() {
         if (snake[0].x < 0 || snake[0].x >= resolution || snake[0].y < 0 || snake[0].y >= resolution) {
             snake = [{ x: 10, y: 10 }];
             velocity = { x: 1, y: 0 };
-            score = 0;
-            updateScore();
+            if (currentScore > topScore) {
+                topScore = currentScore;
+                updateTopScore();
+            }
+            currentScore = 0;
+            updateCurrentScore();
         }
 
         ctx.fillStyle = '#c82e50';
