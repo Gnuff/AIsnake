@@ -1,19 +1,14 @@
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-const notes = [
-  110, 138.59, 164.81, 174.61, 164.81, 138.59, 110, 174.61, 207.65, 246.94,
-  261.63, 246.94, 207.65, 174.61, 130.81, 164.81
-];
-let startTime = null;
-let scheduledNotes = [];
-let timeoutId = null;
 
-function scheduleNote(note, time) {
+function playDrumSample(time) {
   const oscillator = audioContext.createOscillator();
-  oscillator.type = 'triangle';
-  oscillator.frequency.value = note;
-
   const gain = audioContext.createGain();
-  gain.gain.setValueAtTime(0.4, time);
+
+  oscillator.type = 'sine';
+  oscillator.frequency.setValueAtTime(150, time);
+  oscillator.frequency.exponentialRampToValueAtTime(0.001, time + 0.5);
+
+  gain.gain.setValueAtTime(1, time);
   gain.gain.exponentialRampToValueAtTime(0.001, time + 0.5);
 
   oscillator.connect(gain);
@@ -21,8 +16,33 @@ function scheduleNote(note, time) {
 
   oscillator.start(time);
   oscillator.stop(time + 0.5);
+}
 
-  scheduledNotes.push({ oscillator, time, duration: 0.5 });
+const notes = [110, 138.59, 164.81, 174.61, 164.81, 138.59, 110, 174.61, 207.65, 246.94, 261.63, 246.94, 207.65, 174.61, 130.81, 164.81, 196, 207.65, 196, 164.81, 130.81, 207.65, 246.94, 293.66, 311.13, 293.66, 246.94, 207.65];
+
+let startTime = null;
+let scheduledNotes = [];
+let timeoutId = null;
+
+function scheduleNote(note, time) {
+  const osc = audioContext.createOscillator();
+  osc.type = 'triangle';
+  osc.frequency.value = note;
+
+  const gain = audioContext.createGain();
+  osc.connect(gain);
+  gain.connect(audioContext.destination);
+
+  const duration = 0.5;
+  gain.gain.setValueAtTime(0.4, time);
+  gain.gain.exponentialRampToValueAtTime(0.001, time + duration);
+
+  osc.start(time);
+  osc.stop(time + duration);
+
+  scheduledNotes.push({ osc, time, duration });
+
+  playDrumSample(time);
 }
 
 function playNotes() {
@@ -43,16 +63,16 @@ function loop() {
       startTime = audioContext.currentTime + 0.1;
       playNotes();
     }
+
+    timeoutId = setTimeout(loop, (notes.length * 0.5 - 0.1) * 1000);
   } else {
     stopMusic();
   }
-
-  timeoutId = setTimeout(loop, (notes.length * 0.5 - 0.1) * 1000);
 }
 
 function stopMusic() {
-  scheduledNotes.forEach(({ oscillator, time, duration }) => {
-    oscillator.stop(audioContext.currentTime);
+  scheduledNotes.forEach(({ osc, time, duration }) => {
+    osc.stop(audioContext.currentTime);
   });
   scheduledNotes = [];
   startTime = null;
