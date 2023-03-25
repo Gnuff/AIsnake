@@ -22,6 +22,7 @@ const notes = [  110, 138.59, 164.81, 174.61, 164.81, 138.59, 110,  174.61, 207.
 
 let startTime = audioContext.currentTime + 0.1;
 var scheduledNotes = [];
+let timeoutId; // Add this line
 
 function scheduleNote(note, time) {
   const osc = audioContext.createOscillator();
@@ -58,7 +59,7 @@ function playNotes() {
 
 function loop() {
   playNotes();
-  setTimeout(loop, notes.length * 0.5 * 1000);
+  timeoutId = setTimeout(loop, notes.length * 0.5 * 1000);
 }
 
 function stopMusic() {
@@ -66,6 +67,7 @@ function stopMusic() {
     osc.stop(audioContext.currentTime);
   });
   scheduledNotes = [];
+  clearTimeout(timeoutId); // Add this line
 }
 
 window.addEventListener('resetMusic', () => {
