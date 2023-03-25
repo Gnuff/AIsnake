@@ -66,7 +66,9 @@ function stopMusic() {
   scheduledNotes.forEach(({osc, time, duration}) => {
     osc.stop(audioContext.currentTime);
   });
-  scheduledNotes = [];
+  setTimeout(() => {
+    scheduledNotes = [];
+  }, 500);
   clearTimeout(timeoutId); // Add this line
 }
 
