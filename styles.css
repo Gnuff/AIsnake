@@ -25,7 +25,7 @@ h1 {
     display: flex;
     justify-content: space-around;
     width: 100%;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
     color: #37935f;
 }
 
@@ -41,14 +41,14 @@ h1 {
 }
 
 canvas {
-    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
     border-radius: 15px;
 }
 
 main p {
     color: #37935f;
-    font-size: 1.1rem;
-    margin-top: 10px;
+    font-size: 1.8rem;
+    margin-top: 20px;
     margin-bottom: 20px;
     text-align: center;
 }
