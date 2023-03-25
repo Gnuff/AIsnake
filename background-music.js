@@ -59,7 +59,7 @@ function playNotes() {
 
 function loop() {
   playNotes();
-  timeoutId = setTimeout(loop, notes.length * 0.5 * 100);
+  timeoutId = setTimeout(loop, (notes.length * 0.5 - 0.1) * 1000);
 }
 
 function stopMusic() {
