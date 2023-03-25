@@ -25,6 +25,8 @@ function playMelody() {
   const notes = [
     110, 138.59, 164.81, 174.61, 164.81, 138.59, 110,
     174.61, 207.65, 246.94, 261.63, 246.94, 207.65, 174.61,
+    130.81, 164.81, 196, 207.65, 196, 164.81, 130.81,
+    207.65, 246.94, 293.66, 311.13, 293.66, 246.94, 207.65
   ];
   const baseDuration = 0.3; // Base duration when the current score is 0
   const minDuration = 0.1; // Minimum duration when the current score is higher
