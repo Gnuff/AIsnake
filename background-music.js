@@ -70,6 +70,7 @@ function stopMusic() {
 
 window.addEventListener('resetMusic', () => {
   stopMusic();
+  scheduledNotes = [];
   startTime = audioContext.currentTime + 0.1;
 });
 
