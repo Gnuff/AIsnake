@@ -37,7 +37,7 @@ h1 {
 }
 
 #current-score span, #top-score span, #death-count span {
-    color: #245738;
+    color: #000000;
 }
 
 #current-score-number, #top-score-number, #death-count-number {
