@@ -43,11 +43,11 @@ function loop() {
       startTime = audioContext.currentTime + 0.1;
       playNotes();
     }
-
-    timeoutId = setTimeout(loop, (notes.length * 0.5 - 0.1) * 1000);
   } else {
     stopMusic();
   }
+
+  timeoutId = setTimeout(loop, (notes.length * 0.5 - 0.1) * 1000);
 }
 
 function stopMusic() {
