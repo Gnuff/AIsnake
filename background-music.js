@@ -18,15 +18,10 @@ function playDrumSample(time) {
   oscillator.stop(time + 0.5);
 }
 
-const notes = [
-  110, 138.59, 164.81, 174.61, 164.81, 138.59, 110,
-  174.61, 207.65, 246.94, 261.63, 246.94, 207.65, 174.61,
-  130.81, 164.81, 196, 207.65, 196, 164.81, 130.81,
-  207.65, 246.94, 293.66, 311.13, 293.66, 246.94, 207.65
-];
+const notes = [  110, 138.59, 164.81, 174.61, 164.81, 138.59, 110,  174.61, 207.65, 246.94, 261.63, 246.94, 207.65, 174.61,  130.81, 164.81, 196, 207.65, 196, 164.81, 130.81,  207.65, 246.94, 293.66, 311.13, 293.66, 246.94, 207.65];
 
 let startTime = audioContext.currentTime + 0.1;
-let scheduledNotes = []; // Add this line
+let scheduledNotes = [];
 
 function scheduleNote(note, time) {
   const osc = audioContext.createOscillator();
@@ -44,7 +39,7 @@ function scheduleNote(note, time) {
   osc.start(time);
   osc.stop(time + duration);
 
-  scheduledNotes.push({osc, time, duration}); // Add this line
+  scheduledNotes.push({osc, time, duration});
 
   playDrumSample(time);
 }
@@ -66,7 +61,6 @@ function loop() {
   setTimeout(loop, notes.length * 0.5 * 1000);
 }
 
-// Add this new function
 function stopMusic() {
   scheduledNotes.forEach(({osc, time, duration}) => {
     osc.stop(audioContext.currentTime);
@@ -75,7 +69,7 @@ function stopMusic() {
 }
 
 window.addEventListener('resetMusic', () => {
-  stopMusic(); // Add this line
+  stopMusic();
   startTime = audioContext.currentTime + 0.1;
 });
 
