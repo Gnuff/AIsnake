@@ -21,7 +21,7 @@ function playDrumSample(time) {
 const notes = [  110, 138.59, 164.81, 174.61, 164.81, 138.59, 110,  174.61, 207.65, 246.94, 261.63, 246.94, 207.65, 174.61,  130.81, 164.81, 196, 207.65, 196, 164.81, 130.81,  207.65, 246.94, 293.66, 311.13, 293.66, 246.94, 207.65];
 
 let startTime = audioContext.currentTime + 0.1;
-let scheduledNotes = [];
+var scheduledNotes = [];
 let timeoutId;
 
 function scheduleNote(note, time) {
@@ -46,38 +46,32 @@ function scheduleNote(note, time) {
 }
 
 function playNotes() {
-  const speedFactor = 1 - Math.min(currentScore / 25, 0.7);
-  const noteDuration = 0.5 * speedFactor;
+  if (currentScore > 0) {
+    const speedFactor = 1 - Math.min(currentScore / 25, 0.7);
+    const noteDuration = 0.5 * speedFactor;
 
-  notes.forEach((note, index) => {
-    const time = startTime + index * noteDuration;
-    scheduleNote(note, time);
-  });
+    notes.forEach((note, index) => {
+      const time = startTime + index * noteDuration;
+      scheduleNote(note, time);
+    });
 
-  startTime += notes.length * noteDuration;
+    startTime += notes.length * noteDuration;
+  }
 }
 
-function startMusic() {
-  scheduledNotes = [];
+function loop() {
   playNotes();
-  timeoutId = setTimeout(startMusic, (notes.length * 0.5 - 0.1) * 1000);
+  timeoutId = setTimeout(loop, (notes.length * 0.5 - 0.1) * 1000);
 }
 
 function stopMusic() {
   scheduledNotes.forEach(({osc, time, duration}) => {
     osc.stop(audioContext.currentTime);
   });
+  setTimeout(() => {
+    scheduledNotes = [];
+  }, 0);
   clearTimeout(timeoutId);
 }
 
-function resetMusic() {
-  if (currentScore === 0) {
-    stopMusic();
-  } else if (currentScore === 2) {
-    startMusic();
-  }
-}
-
-window.addEventListener('resetMusic', resetMusic);
-
-startMusic();
+loop();
