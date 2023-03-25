@@ -1,5 +1,3 @@
-import { loop } from './background-music.js';
-
 class Particle {
   constructor(x, y) {
     this.x = x;
