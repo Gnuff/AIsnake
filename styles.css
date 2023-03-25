@@ -11,8 +11,11 @@ body {
 }
 
 header {
-    text-align: center;
-    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
 h1 {
@@ -41,10 +44,8 @@ h1 {
 }
 
 .logo-image {
-    width: 150px;
-    height: 150px;
-    display: block;
-    margin: 10 auto;
+    width: 80px;
+    height: 80px;
 }
 
 canvas {
