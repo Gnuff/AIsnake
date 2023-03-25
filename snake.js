@@ -1,3 +1,27 @@
+class Particle {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+    this.size = Math.random() * 3 + 1;
+    this.speedX = Math.random() * 3 - 1.5;
+    this.speedY = Math.random() * 3 - 1.5;
+    this.opacity = 1;
+  }
+
+  update() {
+    this.x += this.speedX;
+    this.y += this.speedY;
+    this.opacity -= 0.01;
+  }
+
+  draw() {
+    ctx.fillStyle = `rgba(200, 80, 94, ${this.opacity})`;
+    ctx.fillRect(this.x, this.y, this.size, this.size);
+  }
+}
+
+let particles = [];
+
 const canvas = document.getElementById("game-board");
 const ctx = canvas.getContext("2d");
 const gridSize = 20;
@@ -57,6 +81,7 @@ function game() {
     updateSnake();
     checkCollision();
     checkApple();
+    updateParticles();
     draw();
 }
 
@@ -97,11 +122,21 @@ function checkApple() {
         
         // Play the chomp sound
         playChompSound();
+        spawnParticles();
 
         clearInterval(gameInterval); // Clear the existing interval
         speed = 100 - Math.min(currentScore * 5, 60); // Increase speed based on the current score
         gameInterval = setInterval(game, speed); // Set the new interval with the updated speed
     }
+}
+
+function updateParticles() {
+  particles.forEach((particle, index) => {
+    particle.update();
+    if (particle.opacity <= 0) {
+      particles.splice(index, 1);
+    }
+  });
 }
 
 function draw() {
@@ -117,6 +152,21 @@ function draw() {
     // Draw apple
     ctx.fillStyle = "#c8505e";
     ctx.fillRect(apple.x * gridSize, apple.y * gridSize, gridSize - 1, gridSize - 1);
+  
+    // Draw particles
+    particles.forEach(particle => {
+    particle.draw();
+    });
+}
+
+function spawnParticles() {
+  const particleCount = 10;
+  const centerX = apple.x * gridSize + gridSize / 2;
+  const centerY = apple.y * gridSize + gridSize / 2;
+
+  for (let i = 0; i < particleCount; i++) {
+    particles.push(new Particle(centerX, centerY));
+  }
 }
 
 function spawnApple() {
