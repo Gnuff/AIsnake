@@ -77,6 +77,7 @@ function init() {
     clearInterval(gameInterval);
     speed = 100; // Set the initial speed
     gameInterval = setInterval(game, speed);
+    loop(currentScore);
 }
 
 function game() {
@@ -84,7 +85,6 @@ function game() {
     checkCollision();
     checkApple();
     updateParticles();
-    loop(currentScore);
     draw();
 }
 
