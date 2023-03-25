@@ -193,6 +193,7 @@ function updateScore() {
 function updateDeathCount() {
     const deathCountElement = document.getElementById("death-count");
     deathCountElement.textContent = `Deaths: ${deathCount}`;
+    window.dispatchEvent(new Event('resetMusic'));
 }
 
 // Updated keydown event listener
