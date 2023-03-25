@@ -1,23 +1,5 @@
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
-function playDrumSample(time) {
-  const oscillator = audioContext.createOscillator();
-  const gain = audioContext.createGain();
-
-  oscillator.type = 'sine';
-  oscillator.frequency.setValueAtTime(150, time);
-  oscillator.frequency.exponentialRampToValueAtTime(0.001, time + 0.5);
-
-  gain.gain.setValueAtTime(1, time);
-  gain.gain.exponentialRampToValueAtTime(0.001, time + 0.5);
-
-  oscillator.connect(gain);
-  gain.connect(audioContext.destination);
-
-  oscillator.start(time);
-  oscillator.stop(time + 0.5);
-}
-
 const notes = [
   110, 138.59, 164.81, 174.61, 164.81, 138.59, 110,
   174.61, 207.65, 246.94, 261.63, 246.94, 207.65, 174.61,
@@ -26,7 +8,6 @@ const notes = [
 ];
 
 let startTime = audioContext.currentTime + 0.1;
-
 let scheduledNotes = [];
 
 function scheduleNote(note, time) {
@@ -45,9 +26,8 @@ function scheduleNote(note, time) {
   osc.start(time);
   osc.stop(time + duration);
 
-  scheduledNotes.push({ osc, time, duration });
-
-  playDrumSample(time);
+  // Add the oscillator to the scheduledNotes array
+  scheduledNotes.push({ oscillator: osc, endTime: time + duration });
 }
 
 function playNotes() {
@@ -62,23 +42,23 @@ function playNotes() {
   startTime += notes.length * noteDuration;
 }
 
-function loop() {
-  stopMusic();
-  playNotes();
-  setTimeout(loop, notes.length * 0.5 * 1000);
-}
-
 function stopMusic() {
-  scheduledNotes.forEach(({osc, time, duration}) => {
-    if (audioContext.currentTime >= time && audioContext.currentTime <= time + duration) {
-      osc.stop(audioContext.currentTime);
-    }
+  scheduledNotes.forEach(note => {
+    note.oscillator.stop(0);
   });
   scheduledNotes = [];
 }
 
-window.addEventListener('resetMusic', () => {
-  startTime = audioContext.currentTime + 0.1;
-});
+function loop() {
+  if (currentScore === 2) {
+    playNotes();
+  }
+
+  if (currentScore === 0) {
+    stopMusic();
+  }
+
+  setTimeout(loop, notes.length * 0.5 * 1000);
+}
 
 loop();
