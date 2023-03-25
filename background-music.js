@@ -46,7 +46,9 @@ function stopMusic() {
     note.oscillator.stop(0);
   });
   scheduledNotes = [];
+  isMusicPlaying = false;
 }
+
 
 function loop() {
   if (currentScore === 2 && !isMusicPlaying) {
