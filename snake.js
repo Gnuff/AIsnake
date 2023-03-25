@@ -149,7 +149,7 @@ function gameLoop() {
         }
     }
 
-    setTimeout(gameLoop, 150);
+    setTimeout(gameLoop, 100);
 }
 
 gameLoop();
