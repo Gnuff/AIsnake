@@ -7,29 +7,22 @@ let startTime = null;
 let scheduledNotes = [];
 let timeoutId = null;
 
-// Load the drum sample buffer
-const drumSampleBuffer = audioContext.createBuffer(1, 44100, 44100);
-const drumSampleData = drumSampleBuffer.getChannelData(0);
-for (let i = 0; i < 44100; i++) {
-  drumSampleData[i] = Math.random() * 2 - 1;
-}
-
 function scheduleNote(note, time) {
-  const source = audioContext.createBufferSource();
-  source.buffer = drumSampleBuffer;
-  source.playbackRate.value = note / 440;
+  const oscillator = audioContext.createOscillator();
+  oscillator.type = 'triangle';
+  oscillator.frequency.value = note;
 
   const gain = audioContext.createGain();
   gain.gain.setValueAtTime(0.4, time);
   gain.gain.exponentialRampToValueAtTime(0.001, time + 0.5);
 
-  source.connect(gain);
+  oscillator.connect(gain);
   gain.connect(audioContext.destination);
 
-  source.start(time);
-  source.stop(time + 0.5);
+  oscillator.start(time);
+  oscillator.stop(time + 0.5);
 
-  scheduledNotes.push({ source, time, duration: 0.5 });
+  scheduledNotes.push({ oscillator, time, duration: 0.5 });
 }
 
 function playNotes() {
@@ -58,8 +51,8 @@ function loop() {
 }
 
 function stopMusic() {
-  scheduledNotes.forEach(({ source, time, duration }) => {
-    source.stop(audioContext.currentTime);
+  scheduledNotes.forEach(({ oscillator, time, duration }) => {
+    oscillator.stop(audioContext.currentTime);
   });
   scheduledNotes = [];
   startTime = null;
