@@ -40,6 +40,11 @@ h1 {
     text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
 }
 
+a {
+    color: #006d5b;
+    text-decoration: none;
+}
+
 #score-info {
     display: flex;
     justify-content: space-around;
