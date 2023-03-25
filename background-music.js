@@ -63,4 +63,8 @@ function loop() {
   setTimeout(loop, notes.length * 0.5 * 1000);
 }
 
+window.addEventListener('resetMusic', () => {
+  startTime = audioContext.currentTime + 0.1;
+});
+
 loop();
