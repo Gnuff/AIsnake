@@ -62,6 +62,9 @@ function loop() {
     stopMusic();
   }
 
+  // Remove finished notes from the scheduledNotes array
+  scheduledNotes = scheduledNotes.filter(note => note.endTime > audioContext.currentTime);
+
   setTimeout(loop, 100);
 }
 
