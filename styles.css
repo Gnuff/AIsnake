@@ -12,29 +12,29 @@ body {
 
 h1 {
     color: #50c878;
-    font-size: 3em;
-    text-shadow: 2px 2px 0px #1c1c1c;
-    padding-bottom: 20px;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 0px #1c1c1c; /* Added shadow below the header text */
 }
 
 #score-info {
-    color: #38975a;
+    color: #50c878;
     display: flex;
     gap: 20px;
     font-size: 1.3em;
-    padding-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 canvas {
     background-color: #1c1c1c;
     display: block;
-    border: 2px solid #50c878;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     margin-bottom: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Added shadow to the canvas */
+    border-radius: 5px; /* Added slightly rounded corners */
 }
 
 #controls-info {
-    color: #38975a;
+    color: #50c878;
     font-size: 1.1em;
     margin-bottom: 30px;
     text-align: center;
@@ -46,5 +46,4 @@ footer {
     position: absolute;
     bottom: 10px;
     text-align: center;
-    padding: 5px;
 }
