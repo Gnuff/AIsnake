@@ -46,6 +46,15 @@ function checkCollision() {
         updateDeathCount();
         init();
     }
+    
+    // Check collision with itself
+    for (let i = 1; i < snake.length; i++) {
+        if (snake[0].x === snake[i].x && snake[0].y === snake[i].y) {
+            deathCount++;
+            updateDeathCount();
+            init();
+        }
+    }
 }
 
 function checkApple() {
@@ -94,6 +103,7 @@ function updateDeathCount() {
     deathCountElement.textContent = `Deaths: ${deathCount}`;
 }
 
+// Updated keydown event listener
 document.addEventListener("keydown", event => {
     const keyToDirection = {
         ArrowUp: { x: 0, y: -1 },
@@ -104,7 +114,9 @@ document.addEventListener("keydown", event => {
 
     const newDirection = keyToDirection[event.key];
 
-    if (newDirection) {
+    if (newDirection &&
+        !(newDirection.x === -direction.x && newDirection.y === direction.y) &&
+        !(newDirection.x === direction.x && newDirection.y === -direction.y)) {
         direction = newDirection;
     }
 });
