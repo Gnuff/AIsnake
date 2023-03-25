@@ -1,53 +1,57 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #232d30;
+    background-color: #4f4f4f;
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 10px;
 }
 
 h1 {
-    font-size: 2.5rem;
+    font-size: 2rem;
     color: #50c878;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-    margin: 1rem 0;
-    padding-bottom: 0.5rem;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 #score-info {
     display: flex;
-    justify-content: space-between;
-    width: 600px;
+    justify-content: space-around;
+    width: 100%;
+    margin-bottom: 10px;
+    color: #37935f;
+}
+
+#current-score, #top-score, #death-count {
     font-size: 1.2rem;
     font-weight: bold;
-    color: #36764a;
-    margin-bottom: 1rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
-#score-info span {
-    color: #2d6946;
-}
-
-.score-number {
-    color: #245738;
+#current-score span, #top-score span, #death-count span {
+    color: #295b44;
 }
 
 canvas {
-    box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.4);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
     border-radius: 5px;
-    background-color: #2d2e2b;
-    margin-bottom: 1rem;
 }
 
-#controls-info {
-    color: #50c878;
-    margin-bottom: 1rem;
+main p {
+    color: #37935f;
+    font-size: 1.1rem;
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 
 footer {
     color: #50c878;
-    position: absolute;
-    bottom: 1rem;
+    font-size: 0.9rem;
 }
