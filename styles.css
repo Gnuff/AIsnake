@@ -40,6 +40,10 @@ h1 {
     color: #295b44;
 }
 
+.score-number {
+    color: #245738;
+}
+
 canvas {
     box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
     border-radius: 15px;
