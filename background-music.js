@@ -62,5 +62,3 @@ function stopMusic() {
 window.addEventListener('resetMusic', () => {
   stopMusic();
 });
-
-loop();
