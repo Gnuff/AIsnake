@@ -83,6 +83,7 @@ function game() {
     checkCollision();
     checkApple();
     updateParticles();
+    loop();
     draw();
 }
 
