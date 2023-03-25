@@ -61,15 +61,14 @@ function checkApple() {
 }
 
 function draw() {
-    ctx.fillStyle = "#1c211d";
+    ctx.fillStyle = "#0d100d"; // Changed the canvas background color to a darker shade
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-
 
     // Draw snake
     ctx.fillStyle = "#50c878";
     snake.forEach(segment => {
         ctx.fillRect(segment.x * gridSize, segment.y * gridSize, gridSize - 1, gridSize - 1);
-            });
+    });
 
     // Draw apple
     ctx.fillStyle = "#c8505e";
