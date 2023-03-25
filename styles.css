@@ -6,7 +6,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     min-height: 100vh;
 }
 
@@ -16,7 +16,7 @@ header {
 }
 
 h1 {
-    font-size: 2rem;
+    font-size: 3rem;
     color: #50c878;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
@@ -33,6 +33,7 @@ h1 {
     font-size: 1.2rem;
     font-weight: bold;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    margin: 0 5px;
 }
 
 #current-score span, #top-score span, #death-count span {
@@ -49,6 +50,7 @@ main p {
     font-size: 1.1rem;
     margin-top: 10px;
     margin-bottom: 20px;
+    text-align: center;
 }
 
 footer {
