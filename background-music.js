@@ -1,48 +1,35 @@
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-
-function playDrumSample(time) {
-  const oscillator = audioContext.createOscillator();
-  const gain = audioContext.createGain();
-
-  oscillator.type = 'sine';
-  oscillator.frequency.setValueAtTime(150, time);
-  oscillator.frequency.exponentialRampToValueAtTime(0.001, time + 0.5);
-
-  gain.gain.setValueAtTime(1, time);
-  gain.gain.exponentialRampToValueAtTime(0.001, time + 0.5);
-
-  oscillator.connect(gain);
-  gain.connect(audioContext.destination);
-
-  oscillator.start(time);
-  oscillator.stop(time + 0.5);
-}
-
-const notes = [110, 138.59, 164.81, 174.61, 164.81, 138.59, 110, 174.61, 207.65, 246.94, 261.63, 246.94, 207.65, 174.61];
-
+const notes = [
+  110, 138.59, 164.81, 174.61, 164.81, 138.59, 110, 174.61, 207.65, 246.94,
+  261.63, 246.94, 207.65, 174.61, 130.81, 164.81
+];
 let startTime = null;
 let scheduledNotes = [];
 let timeoutId = null;
 
+// Load the drum sample buffer
+const drumSampleBuffer = audioContext.createBuffer(1, 44100, 44100);
+const drumSampleData = drumSampleBuffer.getChannelData(0);
+for (let i = 0; i < 44100; i++) {
+  drumSampleData[i] = Math.random() * 2 - 1;
+}
+
 function scheduleNote(note, time) {
-  const osc = audioContext.createOscillator();
-  osc.type = 'triangle';
-  osc.frequency.value = note;
+  const source = audioContext.createBufferSource();
+  source.buffer = drumSampleBuffer;
+  source.playbackRate.value = note / 440;
 
   const gain = audioContext.createGain();
-  osc.connect(gain);
+  gain.gain.setValueAtTime(0.4, time);
+  gain.gain.exponentialRampToValueAtTime(0.001, time + 0.5);
+
+  source.connect(gain);
   gain.connect(audioContext.destination);
 
-  const duration = 0.5;
-  gain.gain.setValueAtTime(0.4, time);
-  gain.gain.exponentialRampToValueAtTime(0.001, time + duration);
+  source.start(time);
+  source.stop(time + 0.5);
 
-  osc.start(time);
-  osc.stop(time + duration);
-
-  scheduledNotes.push({ osc, time, duration });
-
-  playDrumSample(time);
+  scheduledNotes.push({ source, time, duration: 0.5 });
 }
 
 function playNotes() {
@@ -71,8 +58,8 @@ function loop() {
 }
 
 function stopMusic() {
-  scheduledNotes.forEach(({ osc, time, duration }) => {
-    osc.stop(audioContext.currentTime);
+  scheduledNotes.forEach(({ source, time, duration }) => {
+    source.stop(audioContext.currentTime);
   });
   scheduledNotes = [];
   startTime = null;
