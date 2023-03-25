@@ -29,6 +29,8 @@ function scheduleNote(note, time) {
   scheduledNotes.push({ oscillator: osc, endTime: time + duration });
 }
 
+let loopTimeout;
+
 function playNotes() {
   const speedFactor = 1 - Math.min((currentScore - 2) / 25, 0.7);
   const noteDuration = 0.5 * speedFactor;
@@ -42,9 +44,11 @@ function playNotes() {
 
   // Schedule the next loop of notes
   if (isMusicPlaying) {
-    setTimeout(playNotes, notes.length * noteDuration * 1000);
+    clearTimeout(loopTimeout); // Clear the previous timeout
+    loopTimeout = setTimeout(playNotes, notes.length * noteDuration * 1000);
   }
 }
+
 
 
 function stopMusic() {
