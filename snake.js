@@ -2,16 +2,16 @@ class Particle {
   constructor(x, y) {
     this.x = x;
     this.y = y;
-    this.size = Math.random() * 5 + 2; // Increase the size range
-    this.speedX = Math.random() * 6 - 3; // Increase the speed range
-    this.speedY = Math.random() * 6 - 3; // Increase the speed range
+    this.size = Math.random() * 5 + 2;
+    this.speedX = Math.random() * 6 - 3;
+    this.speedY = Math.random() * 6 - 3;
     this.opacity = 1;
   }
 
   update() {
     this.x += this.speedX;
     this.y += this.speedY;
-    this.opacity -= 0.01;
+    this.opacity -= 0.05; // Increase the opacity decrease value
   }
 
   draw() {
