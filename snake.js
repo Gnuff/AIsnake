@@ -28,6 +28,7 @@ function init() {
 function game() {
     updateSnake();
     checkCollision();
+    checkApple();
     draw();
 }
 
@@ -47,6 +48,18 @@ function checkCollision() {
     }
 }
 
+function checkApple() {
+    if (snake[0].x === apple.x && snake[0].y === apple.y) {
+        snake.push({ x: apple.x, y: apple.y });
+        currentScore++;
+        if (currentScore > topScore) {
+            topScore = currentScore;
+        }
+        updateScore();
+        apple = spawnApple();
+    }
+}
+
 function draw() {
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -55,7 +68,7 @@ function draw() {
     ctx.fillStyle = "#50c878";
     snake.forEach(segment => {
         ctx.fillRect(segment.x * gridSize, segment.y * gridSize, gridSize - 1, gridSize - 1);
-    });
+            });
 
     // Draw apple
     ctx.fillStyle = "red";
@@ -97,3 +110,4 @@ document.addEventListener("keydown", event => {
 });
 
 init();
+
