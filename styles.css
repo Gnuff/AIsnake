@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #3b3e3a;
+    background-color: #3a3f3c;
     margin: 0;
     padding: 0;
     display: flex;
@@ -18,9 +18,10 @@ h1 {
 
 #score-info {
     display: flex;
-    justify-content: space-between;
-    width: 600px;
+    flex-direction: column;
+    align-items: center;
     color: #2d6946;
+    margin-bottom: 1rem;
 }
 
 canvas {
