@@ -18,17 +18,23 @@ function playChompSound() {
   const oscillator = audioContext.createOscillator();
   const gainNode = audioContext.createGain();
 
-  oscillator.type = 'sawtooth'; // Change the type to sawtooth for a darker sound
-  oscillator.frequency.setValueAtTime(200, audioContext.currentTime); // Reduce the frequency for a deeper sound
+  oscillator.type = 'sawtooth';
+  oscillator.frequency.setValueAtTime(200, audioContext.currentTime);
   gainNode.gain.setValueAtTime(1, audioContext.currentTime);
 
   oscillator.connect(gainNode);
   gainNode.connect(audioContext.destination);
 
+  const baseDuration = 0.5; // Base duration when the current score is 0
+  const minDuration = 0.15; // Minimum duration when the current score is higher
+  const speedFactor = 1 - Math.min(currentScore / 10, 0.7); // Calculate the speed factor based on the current score
+  const duration = baseDuration * speedFactor; // Calculate the new duration
+
   oscillator.start();
-  gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.15); // Reduce the duration to make it quicker
-  oscillator.stop(audioContext.currentTime + 0.15); // Adjust the stop time to match the duration
+  gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + duration);
+  oscillator.stop(audioContext.currentTime + duration);
 }
+
 
 
 
