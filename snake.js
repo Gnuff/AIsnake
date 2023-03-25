@@ -2,7 +2,7 @@ class Particle {
   constructor(x, y) {
     this.x = x;
     this.y = y;
-    this.size = Math.random() * 5 + 2;
+    this.size = Math.random() * 8 + 2;
     this.speedX = Math.random() * 6 - 3;
     this.speedY = Math.random() * 6 - 3;
     this.opacity = 1;
