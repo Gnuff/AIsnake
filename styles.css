@@ -37,11 +37,11 @@ h1 {
 }
 
 #current-score span, #top-score span, #death-count span {
-    color: #295b44;
+    color: #245738;
 }
 
-.score-number {
-    color: #245738;
+#current-score-number, #top-score-number, #death-score-number {
+    color: #295b44;
 }
 
 canvas {
