@@ -58,7 +58,7 @@ function loop() {
     stopMusic();
   }
 
-  setTimeout(loop, 250); // Change the interval to check more frequently
+  setTimeout(loop, 100); // Change the interval to check more frequently
 }
 
 loop();
