@@ -13,6 +13,66 @@ let gameInterval;
 
 let speed = 100;
 
+function playChompSound() {
+  const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+  // Create a noise buffer
+  const bufferSize = audioContext.sampleRate;
+  const buffer = audioContext.createBuffer(1, bufferSize, audioContext.sampleRate);
+  const output = buffer.getChannelData(0);
+
+  for (let i = 0; i < bufferSize; i++) {
+    output[i] = Math.random() * 2 - 1;
+  }
+
+  // Create a noise source and set the buffer
+  const noiseSource = audioContext.createBufferSource();
+  noiseSource.buffer = buffer;
+
+  // Create a lowpass filter for the noise
+  const noiseFilter = audioContext.createBiquadFilter();
+  noiseFilter.type = 'lowpass';
+  noiseFilter.frequency.setValueAtTime(600, audioContext.currentTime);
+  noiseFilter.Q.setValueAtTime(1, audioContext.currentTime);
+
+  // Connect the noise source to the filter
+  noiseSource.connect(noiseFilter);
+
+  // Create a gain node for the noise
+  const noiseGain = audioContext.createGain();
+  noiseGain.gain.setValueAtTime(0.5, audioContext.currentTime);
+  noiseGain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 1);
+
+  // Connect the filter to the noise gain
+  noiseFilter.connect(noiseGain);
+
+  // Create an oscillator for the chomp sound
+  const oscillator = audioContext.createOscillator();
+  oscillator.type = 'sine';
+  oscillator.frequency.setValueAtTime(160, audioContext.currentTime);
+
+  // Create a gain node for the oscillator
+  const oscGain = audioContext.createGain();
+  oscGain.gain.setValueAtTime(1, audioContext.currentTime);
+  oscGain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 1);
+
+  // Connect the oscillator to the gain node
+  oscillator.connect(oscGain);
+
+  // Connect both the noise gain and oscillator gain to the destination
+  noiseGain.connect(audioContext.destination);
+  oscGain.connect(audioContext.destination);
+
+  // Start the noise source and oscillator
+  noiseSource.start();
+  oscillator.start();
+
+  // Stop the noise source and oscillator after 1 second
+  noiseSource.stop(audioContext.currentTime + 1);
+  oscillator.stop(audioContext.currentTime + 1);
+}
+
+
 function init() {
     snake = [
         { x: 10, y: 10 },
@@ -69,6 +129,9 @@ function checkApple() {
         }
         updateScore();
         apple = spawnApple();
+        
+        // Play the chomp sound
+        playChompSound();
 
         clearInterval(gameInterval); // Clear the existing interval
         speed = 100 - Math.min(currentScore * 5, 60); // Increase speed based on the current score
