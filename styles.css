@@ -16,9 +16,9 @@ header {
 }
 
 h1 {
-    font-size: 3rem;
+    font-size: 4rem;
     color: #50c878;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
 }
 
 #score-info {
@@ -30,9 +30,9 @@ h1 {
 }
 
 #current-score, #top-score, #death-count {
-    font-size: 1.2rem;
+    font-size: 3rem;
     font-weight: bold;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
     margin: 0 5px;
 }
 
@@ -41,13 +41,13 @@ h1 {
 }
 
 canvas {
-    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
     border-radius: 15px;
 }
 
 main p {
     color: #37935f;
-    font-size: 1.8rem;
+    font-size: 2.2rem;
     margin-top: 20px;
     margin-bottom: 20px;
     text-align: center;
