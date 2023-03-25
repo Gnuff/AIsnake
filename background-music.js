@@ -39,7 +39,13 @@ function playNotes() {
   });
 
   startTime += notes.length * noteDuration;
+
+  // Schedule the next loop of notes
+  if (isMusicPlaying) {
+    setTimeout(playNotes, notes.length * noteDuration * 1000);
+  }
 }
+
 
 function stopMusic() {
   scheduledNotes.forEach(note => {
