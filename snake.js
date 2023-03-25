@@ -11,6 +11,8 @@ let topScore = 0;
 let deathCount = 0;
 let gameInterval;
 
+let speed = 100;
+
 function init() {
     snake = [
         { x: 10, y: 10 },
@@ -22,7 +24,8 @@ function init() {
     currentScore = 0;
     updateScore();
     clearInterval(gameInterval);
-    gameInterval = setInterval(game, delay);
+    speed = 100; // Set the initial speed
+    gameInterval = setInterval(game, speed);
 }
 
 function game() {
@@ -66,6 +69,10 @@ function checkApple() {
         }
         updateScore();
         apple = spawnApple();
+
+        clearInterval(gameInterval); // Clear the existing interval
+        speed = 100 - Math.min(currentScore * 5, 60); // Increase speed based on the current score
+        gameInterval = setInterval(game, speed); // Set the new interval with the updated speed
     }
 }
 
