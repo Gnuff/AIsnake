@@ -11,7 +11,7 @@ class Particle {
   update() {
     this.x += this.speedX;
     this.y += this.speedY;
-    this.opacity -= 0.6; // Increase the opacity decrease value
+    this.opacity -= 0.2; // Increase the opacity decrease value
   }
 
   draw() {
