@@ -61,8 +61,9 @@ function checkApple() {
 }
 
 function draw() {
-    ctx.fillStyle = "black";
+    ctx.fillStyle = "#1c211d";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
+
 
     // Draw snake
     ctx.fillStyle = "#50c878";
@@ -71,7 +72,7 @@ function draw() {
             });
 
     // Draw apple
-    ctx.fillStyle = "red";
+    ctx.fillStyle = "#c8505e";
     ctx.fillRect(apple.x * gridSize, apple.y * gridSize, gridSize - 1, gridSize - 1);
 }
 
