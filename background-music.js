@@ -47,7 +47,7 @@ function scheduleNote(note, time) {
 }
 
 function playNotes() {
-  const speedFactor = 1 - Math.min(currentScore / 50, 0.7);
+  const speedFactor = 1 - Math.min(currentScore / 25, 0.7);
   const noteDuration = 0.5 * speedFactor;
 
   notes.forEach((note, index) => {
