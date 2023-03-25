@@ -68,7 +68,7 @@ function stopMusic() {
   });
   setTimeout(() => {
     scheduledNotes = [];
-  }, 500);
+  }, 50);
   clearTimeout(timeoutId); // Add this line
 }
 
