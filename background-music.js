@@ -28,7 +28,7 @@ function playMelody() {
   ];
   const baseDuration = 0.3; // Base duration when the current score is 0
   const minDuration = 0.1; // Minimum duration when the current score is higher
-  const speedFactor = 1 - Math.min(currentScore / 30, 0.7); // Calculate the speed factor based on the current score
+  const speedFactor = 1 - Math.min(currentScore / 15, 0.9); // Calculate the speed factor based on the current score
   const noteDuration = baseDuration * speedFactor; // Calculate the new duration
   const startTime = audioContext.currentTime;
 
@@ -48,4 +48,5 @@ function playMelody() {
 
 init(); // Call the init function to make sure currentScore is defined
 playMelody();
+
 
