@@ -1,24 +1,6 @@
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
-function playDrumSample(time) {
-  const oscillator = audioContext.createOscillator();
-  const gain = audioContext.createGain();
-
-  oscillator.type = 'sine';
-  oscillator.frequency.setValueAtTime(150, time);
-  oscillator.frequency.exponentialRampToValueAtTime(0.001, time + 0.5);
-
-  gain.gain.setValueAtTime(1, time);
-  gain.gain.exponentialRampToValueAtTime(0.001, time + 0.5);
-
-  oscillator.connect(gain);
-  gain.connect(audioContext.destination);
-
-  oscillator.start(time);
-  oscillator.stop(time + 0.5);
-}
-
-const notes = [110, 138.59, 164.81, 174.61, 164.81, 138.59, 110, 174.61, 207.65, 246.94, 261.63, 246.94, 207.65, 174.61, 130.81, 164.81, 196, 207.65, 196, 164.81, 130.81, 207.65, 246.94, 293.66, 311.13, 293.66, 246.94, 207.65];
+const notes = [  261.63, 293.66, 329.63, 392, 440, 493.88, 523.25, 587.33, 659.25];
 
 let startTime = null;
 let scheduledNotes = [];
@@ -26,7 +8,7 @@ let timeoutId = null;
 
 function scheduleNote(note, time) {
   const osc = audioContext.createOscillator();
-  osc.type = 'triangle';
+  osc.type = 'sine';
   osc.frequency.value = note;
 
   const gain = audioContext.createGain();
@@ -41,8 +23,6 @@ function scheduleNote(note, time) {
   osc.stop(time + duration);
 
   scheduledNotes.push({ osc, time, duration });
-
-  playDrumSample(time);
 }
 
 function playNotes() {
