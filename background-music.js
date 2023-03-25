@@ -67,12 +67,6 @@ function stopMusic() {
     osc.stop(audioContext.currentTime);
   });
   scheduledNotes = [];
-
-  // Stop the music and wait for a short break before restarting
-  startTime = -1;
-  setTimeout(() => {
-    startTime = audioContext.currentTime + 0.1;
-  }, 500); // Set a 0.5 second break before restarting the music
 }
 
 window.addEventListener('resetMusic', () => {
