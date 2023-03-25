@@ -42,7 +42,7 @@ function playChompSound() {
   const oscillator = audioContext.createOscillator();
   const gainNode = audioContext.createGain();
 
-  oscillator.type = 'sawtooth';
+  oscillator.type = 'lowpass';
   oscillator.frequency.setValueAtTime(200, audioContext.currentTime);
   gainNode.gain.setValueAtTime(1, audioContext.currentTime);
 
