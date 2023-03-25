@@ -1,49 +1,42 @@
 body {
-    background-color: #2b2b2b;
-    font-family: 'Arial', sans-serif;
+    font-family: Arial, sans-serif;
+    background-color: #3b3e3a;
+    margin: 0;
+    padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    margin: 0;
-    padding: 0;
 }
 
 h1 {
+    font-size: 2.5rem;
     color: #50c878;
-    font-size: 2.5em;
-    margin-bottom: 10px;
-    text-shadow: 2px 2px 0px #1c1c1c; /* Added shadow below the header text */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    margin: 1rem 0;
+    padding-bottom: 0.5rem;
 }
 
 #score-info {
-    color: #50c878;
     display: flex;
-    gap: 20px;
-    font-size: 1.3em;
-    margin-bottom: 10px;
+    justify-content: space-between;
+    width: 600px;
+    color: #2d6946;
 }
 
 canvas {
-    background-color: #1c1c1c;
-    display: block;
-    margin-bottom: 15px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Added shadow to the canvas */
-    border-radius: 5px; /* Added slightly rounded corners */
+    box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
+    background-color: #2d2e2b;
+    margin-bottom: 1rem;
 }
 
 #controls-info {
     color: #50c878;
-    font-size: 1.1em;
-    margin-bottom: 30px;
-    text-align: center;
+    margin-bottom: 1rem;
 }
 
 footer {
     color: #50c878;
-    font-size: 0.8em;
     position: absolute;
-    bottom: 10px;
-    text-align: center;
+    bottom: 1rem;
 }
