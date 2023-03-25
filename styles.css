@@ -29,18 +29,18 @@ h1 {
     justify-content: space-around;
     width: 100%;
     margin-bottom: 0px;
-    color: #37935f;
+    color: #df972b;
 }
 
 #current-score, #top-score, #death-count {
     font-size: 2rem;
     font-weight: bold;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
-    margin: 0 15px;
+    margin: 0 5px;
 }
 
 #current-score span, #top-score span, #death-count span {
-    color: #295b44;
+    color: #df972b;
 }
 
 .logo-image {
