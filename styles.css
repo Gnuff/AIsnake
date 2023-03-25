@@ -51,6 +51,7 @@ main p {
     margin-top: 20px;
     margin-bottom: 20px;
     text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 footer {
