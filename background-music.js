@@ -49,14 +49,16 @@ function stopMusic() {
 
 function loop() {
   if (currentScore === 2) {
-    playNotes();
+    if (scheduledNotes.length === 0) {
+      playNotes();
+    }
   } else if (currentScore > 2) {
     playNotes();
   } else if (currentScore === 0) {
     stopMusic();
   }
 
-  setTimeout(loop, notes.length * 0.5 * 1000);
+  setTimeout(loop, 250); // Change the interval to check more frequently
 }
 
 loop();
