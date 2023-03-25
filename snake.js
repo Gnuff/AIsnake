@@ -15,62 +15,21 @@ let speed = 100;
 
 function playChompSound() {
   const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-
-  // Create a noise buffer
-  const bufferSize = audioContext.sampleRate;
-  const buffer = audioContext.createBuffer(1, bufferSize, audioContext.sampleRate);
-  const output = buffer.getChannelData(0);
-
-  for (let i = 0; i < bufferSize; i++) {
-    output[i] = Math.random() * 2 - 1;
-  }
-
-  // Create a noise source and set the buffer
-  const noiseSource = audioContext.createBufferSource();
-  noiseSource.buffer = buffer;
-
-  // Create a lowpass filter for the noise
-  const noiseFilter = audioContext.createBiquadFilter();
-  noiseFilter.type = 'lowpass';
-  noiseFilter.frequency.setValueAtTime(600, audioContext.currentTime);
-  noiseFilter.Q.setValueAtTime(1, audioContext.currentTime);
-
-  // Connect the noise source to the filter
-  noiseSource.connect(noiseFilter);
-
-  // Create a gain node for the noise
-  const noiseGain = audioContext.createGain();
-  noiseGain.gain.setValueAtTime(0.5, audioContext.currentTime);
-  noiseGain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 1);
-
-  // Connect the filter to the noise gain
-  noiseFilter.connect(noiseGain);
-
-  // Create an oscillator for the chomp sound
   const oscillator = audioContext.createOscillator();
-  oscillator.type = 'sine';
-  oscillator.frequency.setValueAtTime(160, audioContext.currentTime);
+  const gainNode = audioContext.createGain();
 
-  // Create a gain node for the oscillator
-  const oscGain = audioContext.createGain();
-  oscGain.gain.setValueAtTime(1, audioContext.currentTime);
-  oscGain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 1);
+  oscillator.type = 'sawtooth'; // Change the type to sawtooth for a darker sound
+  oscillator.frequency.setValueAtTime(200, audioContext.currentTime); // Reduce the frequency for a deeper sound
+  gainNode.gain.setValueAtTime(1, audioContext.currentTime);
 
-  // Connect the oscillator to the gain node
-  oscillator.connect(oscGain);
+  oscillator.connect(gainNode);
+  gainNode.connect(audioContext.destination);
 
-  // Connect both the noise gain and oscillator gain to the destination
-  noiseGain.connect(audioContext.destination);
-  oscGain.connect(audioContext.destination);
-
-  // Start the noise source and oscillator
-  noiseSource.start();
   oscillator.start();
-
-  // Stop the noise source and oscillator after 1 second
-  noiseSource.stop(audioContext.currentTime + 1);
-  oscillator.stop(audioContext.currentTime + 1);
+  gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.15); // Reduce the duration to make it quicker
+  oscillator.stop(audioContext.currentTime + 0.15); // Adjust the stop time to match the duration
 }
+
 
 
 function init() {
