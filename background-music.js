@@ -26,6 +26,7 @@ const notes = [
 ];
 
 let startTime = audioContext.currentTime + 0.1;
+let scheduledNotes = []; // Add this line
 
 function scheduleNote(note, time) {
   const osc = audioContext.createOscillator();
@@ -42,6 +43,8 @@ function scheduleNote(note, time) {
 
   osc.start(time);
   osc.stop(time + duration);
+
+  scheduledNotes.push({osc, time, duration}); // Add this line
 
   playDrumSample(time);
 }
@@ -63,7 +66,16 @@ function loop() {
   setTimeout(loop, notes.length * 0.5 * 1000);
 }
 
+// Add this new function
+function stopMusic() {
+  scheduledNotes.forEach(({osc, time, duration}) => {
+    osc.stop(audioContext.currentTime);
+  });
+  scheduledNotes = [];
+}
+
 window.addEventListener('resetMusic', () => {
+  stopMusic(); // Add this line
   startTime = audioContext.currentTime + 0.1;
 });
 
