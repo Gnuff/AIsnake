@@ -18,10 +18,20 @@ h1 {
 
 #score-info {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: #2d6946;
+    justify-content: space-between;
+    width: 600px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #36764a;
     margin-bottom: 1rem;
+}
+
+#score-info span {
+    color: #2d6946;
+}
+
+.score-number {
+    color: #245738;
 }
 
 canvas {
