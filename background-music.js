@@ -56,10 +56,10 @@ function playDrumSample(audioBuffer, time) {
     startTime += notes.length * noteDuration;
   }
 
-  window.loop = function () {
+  function loop() {
     playNotes();
     setTimeout(loop, notes.length * 0.5 * 1000);
-  };
+  }
 
   loop();
 })();
