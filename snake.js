@@ -2,9 +2,9 @@ class Particle {
   constructor(x, y) {
     this.x = x;
     this.y = y;
-    this.size = Math.random() * 3 + 1;
-    this.speedX = Math.random() * 3 - 1.5;
-    this.speedY = Math.random() * 3 - 1.5;
+    this.size = Math.random() * 5 + 2; // Increase the size range
+    this.speedX = Math.random() * 6 - 3; // Increase the speed range
+    this.speedY = Math.random() * 6 - 3; // Increase the speed range
     this.opacity = 1;
   }
 
@@ -109,25 +109,31 @@ function checkCollision() {
         }
     }
 }
-
 function checkApple() {
-    if (snake[0].x === apple.x && snake[0].y === apple.y) {
-        snake.push({ x: apple.x, y: apple.y });
-        currentScore++;
-        if (currentScore > topScore) {
-            topScore = currentScore;
-        }
-        updateScore();
-        apple = spawnApple();
-        
-        // Play the chomp sound
-        playChompSound();
-        spawnParticles();
-
-        clearInterval(gameInterval); // Clear the existing interval
-        speed = 100 - Math.min(currentScore * 5, 60); // Increase speed based on the current score
-        gameInterval = setInterval(game, speed); // Set the new interval with the updated speed
+  if (snake[0].x === apple.x && snake[0].y === apple.y) {
+    snake.push({ x: apple.x, y: apple.y });
+    currentScore++;
+    if (currentScore > topScore) {
+      topScore = currentScore;
     }
+    updateScore();
+
+    // Store the position of the apple that was eaten
+    const eatenApple = { x: apple.x, y: apple.y };
+
+    // Spawn a new apple
+    apple = spawnApple();
+
+    // Play the chomp sound
+    playChompSound();
+
+    // Spawn particles at the eaten apple's position
+    spawnParticles(eatenApple);
+
+    clearInterval(gameInterval); // Clear the existing interval
+    speed = 100 - Math.min(currentScore * 5, 60); // Increase speed based on the current score
+    gameInterval = setInterval(game, speed); // Set the new interval with the updated speed
+  }
 }
 
 function updateParticles() {
@@ -159,10 +165,10 @@ function draw() {
     });
 }
 
-function spawnParticles() {
+function spawnParticles(eatenApple) {
   const particleCount = 10;
-  const centerX = apple.x * gridSize + gridSize / 2;
-  const centerY = apple.y * gridSize + gridSize / 2;
+  const centerX = eatenApple.x * gridSize + gridSize / 2;
+  const centerY = eatenApple.y * gridSize + gridSize / 2;
 
   for (let i = 0; i < particleCount; i++) {
     particles.push(new Particle(centerX, centerY));
