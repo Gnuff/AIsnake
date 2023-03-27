@@ -198,6 +198,7 @@ function updateDeathCount() {
 
 // Updated keydown event listener
 document.addEventListener("keydown", event => {
+  event.preventDefault();
     const keyToDirection = {
         ArrowUp: { x: 0, y: -1 },
         ArrowDown: { x: 0, y: 1 },
